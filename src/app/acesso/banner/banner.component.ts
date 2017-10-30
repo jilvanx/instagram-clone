@@ -1,6 +1,7 @@
 import { Component, OnInit, trigger, state, style, transition, animate } from '@angular/core';
 
-import { Imagem } from './imagem.model';
+import { Imagem } from './imagem.model'
+
 
 @Component({
   selector: 'app-banner',
@@ -14,52 +15,49 @@ import { Imagem } from './imagem.model';
       state('visivel', style({
         opacity: 1
       })),
-      transition('escondido <=> visivel', animate('1s ease-in')),
-      // transition('visivel => escondido', animate('1s ease-in'))
+      transition('escondido <=> visivel', animate('1s ease-in'))
     ])
   ]
 })
 export class BannerComponent implements OnInit {
 
-  // tslint:disable-next-line:no-inferrable-types
-  public estado: string = 'visivel';
+  public estado: string = 'visivel'
 
   public imagens: Imagem[] = [
-    {estado: 'visivel', url: '/assets/banner-acesso/img_1.png'},
-    {estado: 'escondido', url: '/assets/banner-acesso/img_2.png'},
-    {estado: 'escondido', url: '/assets/banner-acesso/img_3.png'},
-    {estado: 'escondido', url: '/assets/banner-acesso/img_4.png'},
-    {estado: 'escondido', url: '/assets/banner-acesso/img_5.png'}
-  ];
+    { estado: 'visivel', url: '/assets/banner-acesso/img_1.png' },
+    { estado: 'escondido', url: '/assets/banner-acesso/img_2.png' },
+    { estado: 'escondido', url: '/assets/banner-acesso/img_3.png' },
+    { estado: 'escondido', url: '/assets/banner-acesso/img_4.png' },
+    { estado: 'escondido', url: '/assets/banner-acesso/img_5.png' }
+  ]
 
   constructor() { }
 
   ngOnInit() {
-    setTimeout(() => this.logicaRotacao(), 2000);
+    setTimeout(() => this.logicaRotacao(), 3000)
   }
 
   public logicaRotacao(): void {
+    
+    //auxilia na exibição da imagem seguinte
+    let idx: number
 
-    // auxilia na exbição da imagem seguinte
-    let idx: number;
-
-    // oculta a imagem
-    for (let i: number = 0; i <= 4; i++) {
+    //ocultar imagem
+    for(let i:number = 0; i <= 4; i++) {
 
       if (this.imagens[i].estado === 'visivel') {
-        this.imagens[i].estado = 'escondido';
+        this.imagens[i].estado = 'escondido'
 
-        idx = i === 4 ? 0 : i + 1;
+        idx = i === 4 ? 0 : i + 1
 
-        break;
+        break
       }
-
     }
 
-    // exibe a proxima imagem
-    this.imagens[idx].estado = 'visivel';
-    setTimeout(() => this.logicaRotacao(), 2000);
+    //exibir a próxima imagem
+    this.imagens[idx].estado = 'visivel'
 
+    setTimeout(() => this.logicaRotacao(), 3000)
   }
 
 }
